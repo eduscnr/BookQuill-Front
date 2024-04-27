@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/inicio">
+    <fragment
+        android:id="@+id/inicio"
+        android:name="com.example.bookquill.ui.FragmentoInicio"
+        tools:layout="@layout/fragment_fragmento_inicio"/>
+
+    <fragment
+        android:id="@+id/buscar"
+        android:name="com.example.bookquill.ui.FragmentoBusqueda"
+        tools:layout="@layout/fragment_fragmento_busqueda"/>
+
+    <fragment
+        android:id="@+id/perfil"
+        android:name="com.example.bookquill.ui.FragmentoPerfil"
+        tools:layout="@layout/fragment_fragmento_perfil"/>
+    <action
+        android:id="@+id/action_fragmento_busqueda_to_fragmento_filtrada"
+        app:destination="@id/filtrar" />
+    <action
+        android:id="@+id/action_fragmento_inicio_to_fragmento_lstar_libros"
+        app:destination="@id/librosPopulares" />
+    <fragment
+        android:id="@+id/filtrar"
+        android:name="com.example.bookquill.ui.FragmentoFiltrar"
+        tools:layout="@layout/fragment_fragmento_filtrar"/>
+    <fragment
+        android:id="@+id/librosPopulares"
+        android:name="com.example.bookquill.ui.FragmentoListarLibros"
+        tools:layout="@layout/fragmento_listar_libros"/>
+
+</navigation>

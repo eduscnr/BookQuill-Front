@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.ActividadMasInformacion">
+
+    <TextView
+        android:id="@+id/resenia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="178dp"
+        android:gravity="center"
+        android:text="Reseñas"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
+
+    <ImageView
+        android:id="@+id/portada"
+        android:layout_width="128dp"
+        android:layout_height="238dp"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="142dp"
+        android:src="@drawable/sinportada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="184dp"
+        android:gravity="center"
+        android:text="Titulo"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/portada" />
+
+    <com.willy.ratingbar.ScaleRatingBar
+        android:id="@+id/popularidad"
+        android:layout_width="264dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"
+        app:srb_isIndicator="true"
+        app:srb_stepSize="0.1" />
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="16dp"
+        android:scrollbars="vertical"
+        android:text="Descripción del libro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popularidad" />
+
+    <ImageView
+        android:id="@+id/imageViewFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons8_favoritos_32" />
+
+    <EditText
+        android:id="@+id/nuevaResenia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Nueva Reseña"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resenia" />
+
+    <Button
+        android:id="@+id/publicarResenia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="48dp"
+        android:text="Publicar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nuevaResenia"
+        app:layout_constraintTop_toBottomOf="@+id/resenia" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resenias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nuevaResenia" />
+
+    <ImageView
+        android:id="@+id/pendiente"
+        android:layout_width="35dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="7dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewFav"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pendiente" />
+
+    <ImageView
+        android:id="@+id/leido"
+        android:layout_width="33dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="7dp"
+        app:layout_constraintEnd_toStartOf="@+id/pendiente"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons8_ojo_cerrado_50" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
