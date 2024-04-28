@@ -59,4 +59,11 @@ public interface ApiService {
     @GET("/libros/esLeido")
     Call<Boolean> esLido(@Query("idLibro") int idLibro, @Query("idUsuario") int idUsuario);
 
+    //Endpoints para las lista de libros favoritos, pendiente y leidos
+    @GET("/listarLibros/obtenerLibrosFavoritos")
+    Single<RespuestaListarLibros> obtenerLibrosFavoritos(@Query("page") int page, @Query("idUsuario") int idUsuario);
+    @GET("/listarLibros/obtenerLibrosPendientes")
+    Single<RespuestaListarLibros> obtenerLibrosPendientes(@Query("page") int page, @Query("idUsuario") int idUsuario);
+    @GET("/listarLibros/obtenerLibrosLeidos")
+    Single<RespuestaListarLibros> obtenerLibrosLeidos(@Query("page") int page, @Query("idUsuario") int idUsuario);
 }
