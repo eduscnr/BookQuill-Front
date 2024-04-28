@@ -1,5 +1,6 @@
 package com.example.bookquill.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.bookquill.MainActivity;
 import com.example.bookquill.R;
@@ -51,7 +53,8 @@ public class FragmentoBusqueda extends Fragment {
             }
         });
         binding.buscador.setOnClickListener(view -> {
-            Log.d("PRUEBA", "CLICK");
+            Intent lanzarActividadBusqueda = new Intent(requireContext(), ActividadBusqueda.class);
+            startActivity(lanzarActividadBusqueda);
         });
         return binding.getRoot();
     }

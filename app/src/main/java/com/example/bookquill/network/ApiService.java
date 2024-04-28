@@ -66,4 +66,8 @@ public interface ApiService {
     Single<RespuestaListarLibros> obtenerLibrosPendientes(@Query("page") int page, @Query("idUsuario") int idUsuario);
     @GET("/listarLibros/obtenerLibrosLeidos")
     Single<RespuestaListarLibros> obtenerLibrosLeidos(@Query("page") int page, @Query("idUsuario") int idUsuario);
+
+    //Filtrado busqueda
+    @GET("/listarLibros/filtrarBusqueda")
+    Single<RespuestaListarLibros> filtradoBusqueda(@Query("page") int page, @Query("filtro") String filtro);
 }

@@ -31,7 +31,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActividadIniciarSesion extends AppCompatActivity {
-    private ActivityActividadIniciarSesionBinding binding;
     private EditText email;
     private EditText password;
     private Button iniciarSesion;
