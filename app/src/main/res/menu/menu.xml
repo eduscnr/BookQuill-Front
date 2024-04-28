@@ -2,17 +2,17 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menuInicio"
-        android:icon="@drawable/icons8_casa_48"
+        android:icon="@drawable/inicio"
         app:exb_color="@color/colorBotones"
         android:title="Inicio"/>
     <item
         android:id="@+id/menuBuscar"
-        android:icon="@drawable/icons8_casa_48"
+        android:icon="@drawable/icono_lupa"
         app:exb_color="@color/colorBotones"
         android:title="Busqueda"/>
     <item
         android:id="@+id/menuPerfil"
-        android:icon="@drawable/icons8_casa_48"
+        android:icon="@drawable/user"
         app:exb_color="@color/colorBotones"
         android:title="Perfil"/>
 </menu>

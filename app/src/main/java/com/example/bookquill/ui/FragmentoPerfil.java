@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 import androidx.paging.PagingData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -12,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bookquill.MainActivity;
+import com.example.bookquill.R;
 import com.example.bookquill.adaptadores.AdaptadorLibrosInicio;
 import com.example.bookquill.comparadores.ComparadorLibros;
 import com.example.bookquill.databinding.FragmentFragmentoPerfilBinding;
 import com.example.bookquill.modelo.Libro;
+import com.example.bookquill.viewModel.SharedViewModel;
 import com.example.bookquill.viewModel.ViewModelUsuario;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryUsuario;
 
@@ -43,6 +48,30 @@ public class FragmentoPerfil extends Fragment implements AdaptadorLibrosInicio.O
         init();
         initLeido();
         initPendiente();
+        binding.verMasFavoritos.setOnClickListener(view -> {
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_hostfragment);
+            SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+            viewModel.setArgumentos("Lista de libros favoritos");
+            navController.navigate(R.id.action_fragmento_perfil_to_fragmento_lista_usuario, null,new NavOptions.Builder()
+                    .setPopUpTo(R.id.perfil, true)
+                    .build());
+        });
+        binding.verMasLeido.setOnClickListener(view -> {
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_hostfragment);
+            SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+            viewModel.setArgumentos("Lista de libros leído");
+            navController.navigate(R.id.action_fragmento_perfil_to_fragmento_lista_usuario, null,new NavOptions.Builder()
+                    .setPopUpTo(R.id.perfil, true)
+                    .build());
+        });
+        binding.verMasPendiente.setOnClickListener(view -> {
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_hostfragment);
+            SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+            viewModel.setArgumentos("Lista de libros pendiente");
+            navController.navigate(R.id.action_fragmento_perfil_to_fragmento_lista_usuario, null,new NavOptions.Builder()
+                    .setPopUpTo(R.id.perfil, true)
+                    .build());
+        });
         return binding.getRoot();
     }
     public void init(){

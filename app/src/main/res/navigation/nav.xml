@@ -31,6 +31,17 @@
     <fragment
         android:id="@+id/librosPopulares"
         android:name="com.example.bookquill.ui.FragmentoListarLibros"
-        tools:layout="@layout/fragmento_listar_libros"/>
+        tools:layout="@layout/fragmento_listar_libros">
+        <argument
+            android:name="miStringArgumento"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaLibrosUsuario"
+        android:name="com.example.bookquill.ui.FragmentoListaUsuarioLibros"
+        tools:layout="@layout/fragmento_lista_usuario_libros"/>
+    <action
+        android:id="@+id/action_fragmento_perfil_to_fragmento_lista_usuario"
+        app:destination="@id/listaLibrosUsuario" />
 
 </navigation>

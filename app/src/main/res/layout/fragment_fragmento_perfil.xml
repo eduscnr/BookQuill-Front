@@ -29,6 +29,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/verMasFavoritos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
@@ -68,6 +69,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/verMasPendiente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
@@ -108,6 +110,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/verMasLeido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
