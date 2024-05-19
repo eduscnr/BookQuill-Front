@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,8 +28,13 @@ import com.example.bookquill.modelo.Libro;
 import com.willy.ratingbar.ScaleRatingBar;
 
 public class AdaptadorListarLibros extends PagingDataAdapter<Libro, AdaptadorListarLibros.LibrosViewHolder> {
-    public AdaptadorListarLibros(@NonNull DiffUtil.ItemCallback<Libro> diffCallback) {
+    public interface OnClickLibro {
+        void mostrarInformacionLibro(Libro l);
+    }
+    private OnClickLibro onClickLibro;
+    public AdaptadorListarLibros(@NonNull DiffUtil.ItemCallback<Libro> diffCallback,OnClickLibro onClickLibro) {
         super(diffCallback);
+        this.onClickLibro = onClickLibro;
     }
 
     @NonNull
@@ -67,6 +73,12 @@ public class AdaptadorListarLibros extends PagingDataAdapter<Libro, AdaptadorLis
                     }
                 }).apply(RequestOptions.bitmapTransform(new RoundedCorners(35))).into(holder.imageViewPortada);
             }
+            holder.libro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickLibro.mostrarInformacionLibro(l);
+                }
+            });
         }
     }
 
@@ -76,6 +88,7 @@ public class AdaptadorListarLibros extends PagingDataAdapter<Libro, AdaptadorLis
         private TextView textViewPopularidad;
         private ImageView imageViewPortada;
         private ScaleRatingBar estrellas;
+        private ConstraintLayout libro;
 
         public LibrosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +97,7 @@ public class AdaptadorListarLibros extends PagingDataAdapter<Libro, AdaptadorLis
             textViewPopularidad = itemView.findViewById(R.id.popularidadTextView);
             imageViewPortada = itemView.findViewById(R.id.portada);
             estrellas = itemView.findViewById(R.id.popularidad);
+            libro = itemView.findViewById(R.id.contenidoLibro);
         }
     }
 }

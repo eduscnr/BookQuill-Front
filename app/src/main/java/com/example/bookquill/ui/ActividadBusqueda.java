@@ -6,6 +6,7 @@ import androidx.paging.PagingData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,11 +24,12 @@ import com.example.bookquill.databinding.ActivityActividadBusquedaBinding;
 import com.example.bookquill.modelo.Libro;
 import com.example.bookquill.viewModel.ViewModelActividadBuscador;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryActividadBuscador;
+import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
-public class ActividadBusqueda extends AppCompatActivity {
+public class ActividadBusqueda extends AppCompatActivity implements AdaptadorListarLibros.OnClickLibro{
     private ActivityActividadBusquedaBinding binding;
     private ViewModelActividadBuscador viewModelActividadBuscador;
     private FactoryActividadBuscador factoryActividadBuscador;
@@ -44,7 +46,7 @@ public class ActividadBusqueda extends AppCompatActivity {
             imm.showSoftInput(binding.buscador, InputMethodManager.SHOW_IMPLICIT);
         }
         binding.buscador.selectAll();
-        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros());
+        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros(), this);
         binding.recyclerViewResultado.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewResultado.setAdapter(adaptadorListarLibros);
         binding.buscador.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -64,7 +66,7 @@ public class ActividadBusqueda extends AppCompatActivity {
         factoryActividadBuscador = new FactoryActividadBuscador(MainActivity.getToken(), filtro);
         viewModelActividadBuscador = new ViewModelProvider(ActividadBusqueda.this, factoryActividadBuscador).get(ViewModelActividadBuscador.class);
         viewModelActividadBuscador.init(filtro);
-        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros());
+        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros(), this);
         binding.recyclerViewResultado.setHasFixedSize(true);
         binding.recyclerViewResultado.setAdapter(adaptadorListarLibros);
 
@@ -81,4 +83,12 @@ public class ActividadBusqueda extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void mostrarInformacionLibro(Libro l) {
+        Gson gson = new Gson();
+        String libroJson = gson.toJson(l);
+        Intent i = new Intent(this, ActividadMasInformacion.class);
+        i.putExtra("libro", libroJson);
+        startActivity(i);
+    }
 }

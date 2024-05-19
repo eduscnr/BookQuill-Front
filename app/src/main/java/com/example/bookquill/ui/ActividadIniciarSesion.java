@@ -45,7 +45,6 @@ public class ActividadIniciarSesion extends AppCompatActivity {
         email = findViewById(R.id.editTextEmailIn);
         password = findViewById(R.id.editTextPassIn);
         iniciarSesion = findViewById(R.id.btnInicioSesion);
-        textView = findViewById(R.id.prueba);
         apiService = RetrofitClient.getRetrofit().create(ApiService.class);
         Map<String, String> credenciales = new HashMap<>();
         iniciarSesion.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package com.example.bookquill.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -26,11 +27,12 @@ import com.example.bookquill.databinding.FragmentFragmentoFiltrarBinding;
 import com.example.bookquill.modelo.Libro;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryLibrosGenero;
 import com.example.bookquill.viewModel.ViewModelLibrosGenero;
+import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
-public class FragmentoFiltrar extends Fragment {
+public class FragmentoFiltrar extends Fragment implements AdaptadorListarLibros.OnClickLibro{
     private FragmentFragmentoFiltrarBinding binding;
     private String tipo;
     private Disposable disposable;
@@ -47,12 +49,19 @@ public class FragmentoFiltrar extends Fragment {
         factoryLibrosGenero = new FactoryLibrosGenero(MainActivity.getToken(), tipo);
         viewModelLibrosGenero = new ViewModelProvider(this, factoryLibrosGenero).get(ViewModelLibrosGenero.class);
         init();
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(R.id.buscar);
+            }
+        });
         return binding.getRoot();
     }
 
     private void init() {
         binding.recyclerViewListaLibros.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros());
+        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros(), this);
         binding.recyclerViewListaLibros.setAdapter(adaptadorListarLibros);
         viewModelLibrosGenero.getTotalLibros().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
@@ -83,5 +92,13 @@ public class FragmentoFiltrar extends Fragment {
                 navController.navigate(R.id.buscar);
             }
         });
+    }
+    @Override
+    public void mostrarInformacionLibro(Libro l) {
+        Gson gson = new Gson();
+        String libroJson = gson.toJson(l);
+        Intent i = new Intent(requireContext(), ActividadMasInformacion.class);
+        i.putExtra("libro", libroJson);
+        startActivity(i);
     }
 }

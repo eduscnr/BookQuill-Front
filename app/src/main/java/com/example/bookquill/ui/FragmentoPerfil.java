@@ -1,5 +1,6 @@
 package com.example.bookquill.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import com.example.bookquill.modelo.Libro;
 import com.example.bookquill.viewModel.SharedViewModel;
 import com.example.bookquill.viewModel.ViewModelUsuario;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryUsuario;
+import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -124,6 +126,10 @@ public class FragmentoPerfil extends Fragment implements AdaptadorLibrosInicio.O
     }
     @Override
     public void mostrarInformacionLibro(Libro l) {
-
+        Gson gson = new Gson();
+        String libroJson = gson.toJson(l);
+        Intent i = new Intent(requireContext(), ActividadMasInformacion.class);
+        i.putExtra("libro", libroJson);
+        startActivity(i);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bookquill.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.example.bookquill.MainActivity;
 import com.example.bookquill.R;
+import com.example.bookquill.adaptadores.AdaptadorLibrosInicio;
 import com.example.bookquill.adaptadores.AdaptadorListarLibros;
 import com.example.bookquill.comparadores.ComparadorLibros;
 import com.example.bookquill.databinding.FragmentoListaUsuarioLibrosBinding;
@@ -26,11 +28,12 @@ import com.example.bookquill.modelo.Libro;
 import com.example.bookquill.viewModel.SharedViewModel;
 import com.example.bookquill.viewModel.ViewModelUsuario;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryUsuario;
+import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
-public class FragmentoListaUsuarioLibros extends Fragment {
+public class FragmentoListaUsuarioLibros extends Fragment implements AdaptadorListarLibros.OnClickLibro {
     private FragmentoListaUsuarioLibrosBinding binding;
     private SharedViewModel viewModel;
     @Override
@@ -51,13 +54,20 @@ public class FragmentoListaUsuarioLibros extends Fragment {
                 }
             }
         });
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(R.id.perfil);
+            }
+        });
         return binding.getRoot();
     }
 
     private void cargarLeido() {
         FactoryUsuario factoryUsuario = new FactoryUsuario(MainActivity.getToken());
         ViewModelUsuario viewModelUsuario = new ViewModelProvider(this, factoryUsuario).get(ViewModelUsuario.class);
-        AdaptadorListarLibros adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros());
+        AdaptadorListarLibros adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros(), this);
         binding.recyclerViewListaLibros.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerViewListaLibros.setAdapter(adaptadorListarLibros);
         Disposable disposable = viewModelUsuario.flowableLibrosLeido.subscribe(new Consumer<PagingData<Libro>>() {
@@ -71,7 +81,7 @@ public class FragmentoListaUsuarioLibros extends Fragment {
     private void cargarPendiente() {
         FactoryUsuario factoryUsuario = new FactoryUsuario(MainActivity.getToken());
         ViewModelUsuario viewModelUsuario = new ViewModelProvider(this, factoryUsuario).get(ViewModelUsuario.class);
-        AdaptadorListarLibros adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros());
+        AdaptadorListarLibros adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros(), this);
         binding.recyclerViewListaLibros.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerViewListaLibros.setAdapter(adaptadorListarLibros);
         Disposable disposable = viewModelUsuario.flowableLibrosPendientes.subscribe(new Consumer<PagingData<Libro>>() {
@@ -86,7 +96,7 @@ public class FragmentoListaUsuarioLibros extends Fragment {
     private void cargarFavoritos() {
         FactoryUsuario factoryUsuario = new FactoryUsuario(MainActivity.getToken());
         ViewModelUsuario viewModelUsuario = new ViewModelProvider(this, factoryUsuario).get(ViewModelUsuario.class);
-        AdaptadorListarLibros adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros());
+        AdaptadorListarLibros adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros(), this);
         binding.recyclerViewListaLibros.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerViewListaLibros.setAdapter(adaptadorListarLibros);
         Disposable disposable = viewModelUsuario.flowableLibrosFavoritos.subscribe(new Consumer<PagingData<Libro>>() {
@@ -107,5 +117,13 @@ public class FragmentoListaUsuarioLibros extends Fragment {
                 navController.navigate(R.id.perfil);
             }
         });
+    }
+    @Override
+    public void mostrarInformacionLibro(Libro l) {
+        Gson gson = new Gson();
+        String libroJson = gson.toJson(l);
+        Intent i = new Intent(requireContext(), ActividadMasInformacion.class);
+        i.putExtra("libro", libroJson);
+        startActivity(i);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bookquill.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,11 +22,12 @@ import com.example.bookquill.databinding.FragmentoListarLibrosBinding;
 import com.example.bookquill.modelo.Libro;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryLibrosPopulares;
 import com.example.bookquill.viewModel.ViewModelLibrosPopulares;
+import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 
-public class FragmentoListarLibros extends Fragment {
+public class FragmentoListarLibros extends Fragment implements AdaptadorListarLibros.OnClickLibro{
     private FragmentoListarLibrosBinding binding;
     private FactoryLibrosPopulares factoryLibrosPopulares;
     private ViewModelLibrosPopulares viewModelLibrosPopulares;
@@ -44,7 +46,7 @@ public class FragmentoListarLibros extends Fragment {
     }
 
     private void init() {
-        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros());
+        adaptadorListarLibros = new AdaptadorListarLibros(new ComparadorLibros(), this);
         binding.recyclerViewListaLibros.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerViewListaLibros.setAdapter(adaptadorListarLibros);
         viewModelLibrosPopulares.getTotalLibro().observe(getViewLifecycleOwner(), new Observer<Integer>() {
@@ -64,5 +66,13 @@ public class FragmentoListarLibros extends Fragment {
                 }, 500);
             }
         });
+    }
+     @Override
+    public void mostrarInformacionLibro(Libro l) {
+        Gson gson = new Gson();
+        String libroJson = gson.toJson(l);
+        Intent i = new Intent(requireContext(), ActividadMasInformacion.class);
+        i.putExtra("libro", libroJson);
+        startActivity(i);
     }
 }

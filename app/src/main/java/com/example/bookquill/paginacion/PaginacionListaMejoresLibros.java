@@ -44,7 +44,7 @@ public class PaginacionListaMejoresLibros extends RxPagingSource<Integer, Libro>
     @Override
     public Single<LoadResult<Integer, Libro>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
         ApiService apiService = RetrofitClient.getRetrofitToken(token).create(ApiService.class);
-        int pagina = loadParams.getKey() != null ? loadParams.getKey() : 1;
+        int pagina = loadParams.getKey() != null ? loadParams.getKey() : 0;
         return apiService.librosPopulares(pagina)
                 .subscribeOn(Schedulers.io())
                 .map(response ->{

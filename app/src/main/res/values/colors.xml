@@ -4,8 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fondo">#fff2eae0</color>
     <color name="fondo2">#ffdccfc1</color>
-    <color name="nevegacion">#ff8e766e</color>
-    <color name="gris">#ffc5c7cc</color>
+    <color name="nevegacion">#fbf8f6</color>
+    <color name="gris">#dccfc1</color>
     <color name="fondoMasInformacion">#FFDCCFC1</color>
-    <color name="colorBotones">#ff85bc6e</color>
+    <color name="colorBotones">#8f82b8</color>
 </resources>

@@ -37,7 +37,7 @@ public class PaginacionDetalleResenia extends RxPagingSource<Integer, DetalleRes
     @Override
     public Single<LoadResult<Integer, DetalleResenia>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
         ApiService apiService = RetrofitClient.getRetrofitToken(token).create(ApiService.class);
-        int pagina = loadParams.getKey() != null ? loadParams.getKey() : 1;
+        int pagina = loadParams.getKey() != null ? loadParams.getKey() : 0;
         return apiService.mostrarResenias(pagina, idLibro)
                 .subscribeOn(Schedulers.io())
                 .map(detalle -> toLoadResult(detalle, pagina))

@@ -39,7 +39,7 @@ public class PaginacionLibrosGenero extends RxPagingSource<Integer, Libro> {
     @Override
     public Single<LoadResult<Integer, Libro>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
         ApiService apiService = RetrofitClient.getRetrofitToken(token).create(ApiService.class);
-        int pagina = loadParams.getKey() != null ? loadParams.getKey() : 1;
+        int pagina = loadParams.getKey() != null ? loadParams.getKey() : 0;
 
         return apiService.librosPorGenero(pagina, tipo)
                 .subscribeOn(Schedulers.io())

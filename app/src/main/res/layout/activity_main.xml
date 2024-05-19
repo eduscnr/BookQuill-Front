@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gris"
     tools:context=".MainActivity">
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_hostfragment"
@@ -17,11 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav" />
+
     <github.com.st235.lib_expandablebottombar.ExpandableBottomBar
         android:id="@+id/expandable_bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:exb_backgroundColor="#ffffff"
+        android:layout_width="385dp"
+        android:layout_height="65dp"
+        app:exb_backgroundColor="@color/nevegacion"
         app:exb_itemInactiveColor="@color/colorBotones"
         app:exb_items="@menu/menu"
         app:layout_constraintBottom_toBottomOf="parent"
