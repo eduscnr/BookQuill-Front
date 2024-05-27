@@ -32,9 +32,6 @@
         android:id="@+id/librosPopulares"
         android:name="com.example.bookquill.ui.FragmentoListarLibros"
         tools:layout="@layout/fragmento_listar_libros">
-        <argument
-            android:name="miStringArgumento"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/listaLibrosUsuario"

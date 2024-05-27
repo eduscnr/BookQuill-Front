@@ -24,17 +24,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="BookQuill"
+                android:fontFamily="@font/okta_neue_semibold"
                 android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:textSize="40sp"/>
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/avatar"
-                android:background="@drawable/circulo"
-                android:layout_marginStart="8dp"/>
+            <io.getstream.avatarview.AvatarView
+                android:id="@+id/avatarInicial"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:avatarViewInitials="N"
+                android:layout_marginStart="7dp"
+                app:avatarViewInitialsTextColor="@color/white"
+                app:avatarViewInitialsTextSize="30sp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -50,6 +52,7 @@
                 android:text="Recomendados"
                 android:textColor="@color/black"
                 android:textSize="18dp"
+                android:fontFamily="@font/okta_neue_semibold"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:text="ver todos"
+                android:fontFamily="@font/okta_neue_regular"
                 android:textAlignment="textEnd"
-                android:textColor="@color/gris"
                 android:textStyle="bold" />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
@@ -86,6 +89,7 @@
                 android:text="Mejores libros"
                 android:textColor="@color/black"
                 android:textSize="18dp"
+                android:fontFamily="@font/okta_neue_semibold"
                 android:textStyle="bold" />
 
             <TextView
@@ -94,8 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:text="ver todos"
+                android:fontFamily="@font/okta_neue_regular"
                 android:textAlignment="textEnd"
-                android:textColor="@color/gris"
                 android:textStyle="bold" />
         </LinearLayout>
 

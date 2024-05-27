@@ -16,6 +16,8 @@ import com.example.bookquill.modelo.DetalleResenia;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.getstream.avatarview.AvatarView;
+
 public class AdaptadorResenia extends PagingDataAdapter<DetalleResenia, AdaptadorResenia.DetalleReseniaViewHolder> {
     public AdaptadorResenia(@NonNull DiffUtil.ItemCallback<DetalleResenia> diffCallback) {
         super(diffCallback);
@@ -37,6 +39,7 @@ public class AdaptadorResenia extends PagingDataAdapter<DetalleResenia, Adaptado
             Date date = d.getFechaResenia();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             holder.fechaResenia.setText(sdf.format(date));
+            holder.avatar.setAvatarInitials(d.getNombreUsuario());
         }
 
     }
@@ -45,11 +48,13 @@ public class AdaptadorResenia extends PagingDataAdapter<DetalleResenia, Adaptado
         private TextView nombreUsuario;
         private TextView fechaResenia;
         private TextView descripcionResenia;
+        private AvatarView avatar;
         public DetalleReseniaViewHolder(@NonNull View itemView) {
             super(itemView);
             nombreUsuario = itemView.findViewById(R.id.usuarioResenia);
             fechaResenia = itemView.findViewById(R.id.fechaPublicada);
             descripcionResenia = itemView.findViewById(R.id.descripcionResenia);
+            avatar = itemView.findViewById(R.id.avatar);
         }
     }
 }

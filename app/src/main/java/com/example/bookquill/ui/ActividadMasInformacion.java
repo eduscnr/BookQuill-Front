@@ -88,6 +88,7 @@ public class ActividadMasInformacion extends AppCompatActivity {
         }
         binding.titulo.setText(libro.getTitulo());
         binding.descripcion.setText(libro.getDescripcion());
+        binding.inforAutor.setText(libro.getAutor());
         float popularidad = Float.parseFloat(libro.getEstrellas());
         binding.popularidad.setRating(popularidad);
         binding.imageViewFav.setOnClickListener(view -> {
@@ -155,6 +156,9 @@ public class ActividadMasInformacion extends AppCompatActivity {
             public void onFailure(Call<Boolean> call, Throwable throwable) {
 
             }
+        });
+        binding.salirInformacion.setOnClickListener(view -> {
+            finish();
         });
         inicializarRecyclerView();
         insertarPendiente();

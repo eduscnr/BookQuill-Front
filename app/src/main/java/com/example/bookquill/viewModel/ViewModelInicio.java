@@ -1,5 +1,6 @@
 package com.example.bookquill.viewModel;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelKt;
 import androidx.paging.Pager;
@@ -21,9 +22,16 @@ public class ViewModelInicio extends ViewModel {
     public Flowable<PagingData<Libro>> flowableLibrosRecomendados;
     public Flowable<PagingData<Libro>> flowableMejoresLibros;
     private String token;
+    private MutableLiveData<String> nombreUsuario = new MutableLiveData<>();
 
     public ViewModelInicio(String token) {
         this.token = token;
+        initRecomendados();
+        initMejores();
+    }
+    public ViewModelInicio(String token, MutableLiveData nombreUsuario) {
+        this.token = token;
+        this.nombreUsuario = nombreUsuario;
         initRecomendados();
         initMejores();
     }
@@ -64,5 +72,13 @@ public class ViewModelInicio extends ViewModel {
         flowableLibrosRecomendados = PagingRx.getFlowable(pager);
         CoroutineScope coroutineScope = ViewModelKt.getViewModelScope(this);
         PagingRx.cachedIn(flowableLibrosRecomendados, coroutineScope);
+    }
+
+    public MutableLiveData<String> getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(MutableLiveData<String> nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 }

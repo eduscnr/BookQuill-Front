@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.paging.PagingData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,18 +57,14 @@ public class FragmentoInicio extends Fragment implements AdaptadorLibrosInicio.O
     }
 
     private void initViewMejores() {
-        binding.recyclerViewTheBest.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerViewTheBest.setLayoutManager(linearLayoutManager);
         adaptadorMejoresLibros = new AdaptadorLibrosInicio(new ComparadorLibros(), this);
         binding.recyclerViewTheBest.setAdapter(adaptadorMejoresLibros);
         disposableMejores = viewModelInicio.flowableMejoresLibros.subscribe(new Consumer<PagingData<Libro>>() {
             @Override
             public void accept(PagingData<Libro> libroPagingData) throws Throwable {
-                binding.recyclerViewTheBest.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adaptadorMejoresLibros.submitData(getLifecycle(), libroPagingData);
-                    }
-                }, 500);
+                adaptadorMejoresLibros.submitData(getLifecycle(), libroPagingData);
             }
         });
     }
@@ -79,12 +76,7 @@ public class FragmentoInicio extends Fragment implements AdaptadorLibrosInicio.O
         disposableRecomendados = viewModelInicio.flowableLibrosRecomendados.subscribe(new Consumer<PagingData<Libro>>() {
             @Override
             public void accept(PagingData<Libro> libroPagingData) throws Throwable {
-                binding.recyclerViewRecomendados.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adaptadorLibrosRecomendados.submitData(getLifecycle(), libroPagingData);
-                    }
-                },500);
+                adaptadorLibrosRecomendados.submitData(getLifecycle(), libroPagingData);
             }
         });
     }

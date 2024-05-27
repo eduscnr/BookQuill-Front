@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private static String token;
     private ApiService apiService;
     private static UsuarioDTO usuarioDTO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         bottomBar.setOnItemSelectedListener(new Function3<View, MenuItem, Boolean, Unit>() {
             @Override
             public Unit invoke(View view, MenuItem menuItem, Boolean aBoolean) {
-                if(menuItem.getId() == R.id.menuBuscar){
+                if (menuItem.getId() == R.id.menuBuscar) {
                     navController.navigate(R.id.buscar);
-                } else if (menuItem.getId()==R.id.menuInicio) {
+                } else if (menuItem.getId() == R.id.menuInicio) {
                     navController.navigate(R.id.inicio);
-                } else if (menuItem.getId()==R.id.menuPerfil) {
+                } else if (menuItem.getId() == R.id.menuPerfil) {
                     navController.navigate(R.id.perfil);
                 }
                 return null;
@@ -75,9 +76,8 @@ public class MainActivity extends AppCompatActivity {
         apiService.obtenerInformacionUsuario(ActividadIniciarSesion.getEmailUsuairo()).enqueue(new Callback<UsuarioDTO>() {
             @Override
             public void onResponse(Call<UsuarioDTO> call, Response<UsuarioDTO> response) {
-                if(response.isSuccessful()){
-                   usuarioDTO = response.body();
-                   Log.d("PRUEBA USUARIO", usuarioDTO.toString());
+                if (response.isSuccessful()) {
+                    usuarioDTO = response.body();
                 }
             }
 

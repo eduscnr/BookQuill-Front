@@ -32,6 +32,8 @@ public interface ApiService {
     Call<Libro> getLibroById(@Path("id") int id);
     @POST("auth/iniciarSesion")
     Single<ResponseBody> iniciarSesion(@Body Map<String, String> credenciales);
+    @POST("auth/registrar")
+    Single<ResponseBody> registrar(@Query(("email")) String email, @Query("password") String password, @Query("nombreUsuario") String nombreUsuario);
     @POST("auth/usuario")
     Call<UsuarioDTO> obtenerInformacionUsuario(@Query("nombreUsuario") String nombreUsuario);
     @GET("/libros/populares")

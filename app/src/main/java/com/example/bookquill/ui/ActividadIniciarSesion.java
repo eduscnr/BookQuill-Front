@@ -34,6 +34,7 @@ public class ActividadIniciarSesion extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private Button iniciarSesion;
+    private Button registrar;
     private ApiService apiService;
     private TextView textView;
     private static String emailUsuairo;
@@ -45,41 +46,43 @@ public class ActividadIniciarSesion extends AppCompatActivity {
         email = findViewById(R.id.editTextEmailIn);
         password = findViewById(R.id.editTextPassIn);
         iniciarSesion = findViewById(R.id.btnInicioSesion);
+        registrar = findViewById(R.id.btnRegistrar);
         apiService = RetrofitClient.getRetrofit().create(ApiService.class);
         Map<String, String> credenciales = new HashMap<>();
-        iniciarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String emailIntroducido = email.getText().toString();
-                String passwordIntroducido = password.getText().toString();
-                credenciales.put("username", emailIntroducido);
-                credenciales.put("password", passwordIntroducido);
-                apiService.iniciarSesion(credenciales).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<ResponseBody>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        // Aquí puedes manejar la suscripción si es necesario
-                    }
+        iniciarSesion.setOnClickListener(view -> {
+            String emailIntroducido = email.getText().toString();
+            String passwordIntroducido = password.getText().toString();
+            credenciales.put("username", emailIntroducido);
+            credenciales.put("password", passwordIntroducido);
+            apiService.iniciarSesion(credenciales).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<ResponseBody>() {
+                @Override
+                public void onSubscribe(Disposable d) {
 
-                    @Override
-                    public void onSuccess(ResponseBody responseBody) {
-                        try {
-                            String tokenFinal = responseBody.string();
-                            emailUsuairo = emailIntroducido;
-                            Intent i = new Intent(ActividadIniciarSesion.this, MainActivity.class);
-                            i.putExtra("token", tokenFinal);
-                            startActivity(i);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("Response", "Error: ", e);
-                        // Aquí puedes manejar el error
+                @Override
+                public void onSuccess(ResponseBody responseBody) {
+                    try {
+                        String tokenFinal = responseBody.string();
+                        emailUsuairo = emailIntroducido;
+                        Intent i = new Intent(ActividadIniciarSesion.this, MainActivity.class);
+                        i.putExtra("token", tokenFinal);
+                        startActivity(i);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                });
-            }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.e("Response", "Error: ", e);
+                }
+            });
+        });
+        registrar.setOnClickListener(view -> {
+            Intent i = new Intent(ActividadIniciarSesion.this, ActividadRegistro.class);
+            startActivity(i);
+            finish();
         });
     }
 

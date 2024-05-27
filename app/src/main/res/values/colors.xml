@@ -5,7 +5,6 @@
     <color name="fondo">#fff2eae0</color>
     <color name="fondo2">#ffdccfc1</color>
     <color name="nevegacion">#fbf8f6</color>
-    <color name="gris">#dccfc1</color>
-    <color name="fondoMasInformacion">#FFDCCFC1</color>
+    <color name="fondoMasInformacion">#dde1e5</color>
     <color name="colorBotones">#8f82b8</color>
 </resources>

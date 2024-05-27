@@ -76,6 +76,7 @@ public class AdaptadorLibrosInicio extends PagingDataAdapter<Libro, AdaptadorLib
                             }
                         })
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners(35)))
+                        .placeholder(R.drawable.ic_imagen)
                         .into(holder.imageViewPortada);
             }
             holder.cardView.setOnClickListener(new View.OnClickListener() {

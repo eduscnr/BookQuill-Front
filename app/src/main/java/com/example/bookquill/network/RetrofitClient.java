@@ -8,8 +8,8 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    //private static final String BASE_URL= "http://192.168.18.5:9000/";
-    private static final String BASE_URL= "https://c1b3-185-147-19-6.ngrok-free.app/";
+    private static final String BASE_URL= "http://192.168.18.5:9000/";
+    //private static final String BASE_URL= "https://fd48-185-147-19-6.ngrok-free.app/";
     private static Retrofit retrofit = null;
     public static Retrofit getRetrofit(){
         if(retrofit == null){
