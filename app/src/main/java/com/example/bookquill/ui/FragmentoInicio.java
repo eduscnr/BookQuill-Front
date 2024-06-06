@@ -24,6 +24,7 @@ import com.example.bookquill.databinding.FragmentFragmentoInicioBinding;
 import com.example.bookquill.modelo.Libro;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryInicio;
 import com.example.bookquill.viewModel.ViewModelInicio;
+import com.example.bookquill.viewModel.viewModelFactory.ViewModelUser;
 import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -32,6 +33,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 public class FragmentoInicio extends Fragment implements AdaptadorLibrosInicio.OnClickLibro {
     private FragmentFragmentoInicioBinding binding;
     private ViewModelInicio viewModelInicio;
+    private ViewModelUser viewModelUser;
     private FactoryInicio modelFactory;
     private AdaptadorLibrosInicio adaptadorLibrosRecomendados;
     private AdaptadorLibrosInicio adaptadorMejoresLibros;
@@ -46,6 +48,10 @@ public class FragmentoInicio extends Fragment implements AdaptadorLibrosInicio.O
         viewModelInicio = new ViewModelProvider(this, modelFactory).get(ViewModelInicio.class);
         initViewRecomendados();
         initViewMejores();
+        viewModelUser = new ViewModelProvider(requireActivity()).get(ViewModelUser.class);
+        viewModelUser.usuarioDTO.observe(getViewLifecycleOwner(), usuarioDTO -> {
+            binding.avatarInicial.setAvatarInitials(usuarioDTO.getNombreUsuario());
+        });
         binding.textViewMejoresLibros.setOnClickListener(view -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_hostfragment);
             navController.navigate(R.id.action_fragmento_inicio_to_fragmento_lstar_libros, null,new NavOptions.Builder()

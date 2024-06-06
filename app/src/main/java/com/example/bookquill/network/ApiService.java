@@ -3,10 +3,12 @@ package com.example.bookquill.network;
 import com.example.bookquill.modelo.DetalleResenia;
 import com.example.bookquill.modelo.Genero;
 import com.example.bookquill.modelo.Libro;
+import com.example.bookquill.modelo.ReseniaDTO;
 import com.example.bookquill.modelo.RespuestaListaLibrosGenero;
 import com.example.bookquill.modelo.RespuestaListarLibros;
 import com.example.bookquill.modelo.UsuarioDTO;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -72,4 +74,7 @@ public interface ApiService {
     //Filtrado busqueda
     @GET("/listarLibros/filtrarBusqueda")
     Single<RespuestaListarLibros> filtradoBusqueda(@Query("page") int page, @Query("filtro") String filtro);
+
+    @POST("/listarLibros/agregarResenia")
+    Call<Void> agregarResenia(@Body ReseniaDTO reseniaDTO);
 }

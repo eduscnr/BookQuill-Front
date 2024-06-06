@@ -1,230 +1,238 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.madapps.liquid.LiquidRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    app:AniBackColor="@color/colorAccent"
+    app:AniForeColor="@color/black"
+    app:CircleSmaller="6">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        tools:context=".ui.ActividadMasInformacion">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/fondoMasInformacion"
-            app:layout_constraintBottom_toTopOf="@+id/cardView3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageViewFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icons8_favoritos_32" />
-
-            <ImageView
-                android:id="@+id/pendiente"
-                android:layout_width="35dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="7dp"
-                app:layout_constraintEnd_toStartOf="@+id/imageViewFav"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/pendiente" />
-
-            <ImageView
-                android:id="@+id/leido"
-                android:layout_width="33dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="7dp"
-                app:layout_constraintEnd_toStartOf="@+id/pendiente"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icons8_ojo_cerrado_50" />
-
-            <ImageView
-                android:id="@+id/portada"
-                android:layout_width="128dp"
-                android:layout_height="238dp"
-                android:layout_marginStart="135dp"
-                android:layout_marginTop="84dp"
-                android:layout_marginEnd="130dp"
-                android:src="@drawable/sinportada"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.619"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/titulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="168dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="167dp"
-                android:fontFamily="@font/okta_neue_semibold"
-                android:gravity="center"
-                android:text="Titulo"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.517"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/portada" />
-
-            <com.willy.ratingbar.ScaleRatingBar
-                android:id="@+id/popularidad"
-                android:layout_width="264dp"
-                android:layout_height="49dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="65dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.476"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inforAutor"
-                app:srb_isIndicator="true"
-                app:srb_stepSize="0.1" />
-
-            <TextView
-                android:id="@+id/inforAutor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="158dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="157dp"
-                android:fontFamily="@font/okta_neue_light"
-                android:text="Autor"
-                android:textSize="14dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titulo" />
-
-            <ImageView
-                android:id="@+id/salirInformacion"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/flecha" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+            android:background="@color/white"
+            tools:context=".ui.ActividadMasInformacion">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rounded_top_corners">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/fondoMasInformacion"
+                app:layout_constraintBottom_toTopOf="@+id/cardView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/descripcion"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/okta_neue_regular"
-                    android:scrollbars="vertical"
-                    android:text="Descripción del libro"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-                <TextView
-                    android:id="@+id/resenia"
+                <ImageView
+                    android:id="@+id/imageViewFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="178dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="178dp"
-                    android:fontFamily="@font/okta_neue_semibold"
-                    android:gravity="center"
-                    android:text="Reseñas"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/descripcion" />
-
-                <EditText
-                    android:id="@+id/nuevaResenia"
-                    android:layout_width="250dp"
-                    android:layout_height="44dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="27dp"
-                    android:ems="10"
-                    android:fontFamily="@font/okta_neue_light"
-                    android:hint="Nueva Reseña"
-                    android:inputType="text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/resenia" />
-
-                <Button
-                    android:id="@+id/publicarResenia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="48dp"
-                    android:fontFamily="@font/okta_neue_semibold"
-                    android:text="Publicar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/nuevaResenia"
-                    app:layout_constraintTop_toBottomOf="@+id/resenia" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/resenias"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="47dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nuevaResenia" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icons8_favoritos_32" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="25dp"
-                    android:fontFamily="@font/okta_neue_semibold"
-                    android:text="Descripción"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
+                <ImageView
+                    android:id="@+id/pendiente"
+                    android:layout_width="35dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="7dp"
+                    app:layout_constraintEnd_toStartOf="@+id/imageViewFav"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/pendiente" />
+
+                <ImageView
+                    android:id="@+id/leido"
+                    android:layout_width="33dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="7dp"
+                    app:layout_constraintEnd_toStartOf="@+id/pendiente"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icons8_ojo_cerrado_50" />
+
+                <ImageView
+                    android:id="@+id/portada"
+                    android:layout_width="128dp"
+                    android:layout_height="238dp"
+                    android:layout_marginStart="135dp"
+                    android:layout_marginTop="84dp"
+                    android:layout_marginEnd="130dp"
+                    android:src="@drawable/sinportada"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.619"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="168dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="167dp"
+                    android:fontFamily="@font/okta_neue_semibold"
+                    android:gravity="center"
+                    android:text="Titulo"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.517"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/portada" />
+
+                <com.willy.ratingbar.ScaleRatingBar
+                    android:id="@+id/popularidad"
+                    android:layout_width="264dp"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="65dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.476"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inforAutor"
+                    app:srb_isIndicator="true"
+                    app:srb_stepSize="0.1" />
+
+                <TextView
+                    android:id="@+id/inforAutor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="158dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="157dp"
+                    android:fontFamily="@font/okta_neue_light"
+                    android:text="Autor"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titulo" />
+
+                <ImageView
+                    android:id="@+id/salirInformacion"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/flecha" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded_top_corners">
+
+                    <TextView
+                        android:id="@+id/descripcion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/okta_neue_regular"
+                        android:scrollbars="vertical"
+                        android:text="Descripción del libro"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                    <TextView
+                        android:id="@+id/resenia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="178dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="178dp"
+                        android:fontFamily="@font/okta_neue_semibold"
+                        android:gravity="center"
+                        android:text="Reseñas"
+                        android:textSize="18dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
+
+                    <EditText
+                        android:id="@+id/nuevaResenia"
+                        android:layout_width="250dp"
+                        android:layout_height="44dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="27dp"
+                        android:ems="10"
+                        android:fontFamily="@font/okta_neue_light"
+                        android:hint="Nueva Reseña"
+                        android:inputType="text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/resenia" />
+
+                    <Button
+                        android:id="@+id/publicarResenia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="48dp"
+                        android:fontFamily="@font/okta_neue_semibold"
+                        android:text="Publicar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/nuevaResenia"
+                        app:layout_constraintTop_toBottomOf="@+id/resenia" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/resenias"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="47dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nuevaResenia" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/okta_neue_semibold"
+                        android:text="Descripción"
+                        android:textSize="18dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</com.madapps.liquid.LiquidRefreshLayout>

@@ -1,37 +1,26 @@
 package com.example.bookquill;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
+
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.window.OnBackAnimationCallback;
 
-import com.example.bookquill.adaptadores.AdaptadorLibrosInicio;
-import com.example.bookquill.comparadores.ComparadorLibros;
-import com.example.bookquill.modelo.Libro;
+import android.os.Bundle;
+
+import android.view.View;
 import com.example.bookquill.modelo.UsuarioDTO;
 import com.example.bookquill.network.ApiService;
 import com.example.bookquill.network.RetrofitClient;
 import com.example.bookquill.ui.ActividadIniciarSesion;
-import com.example.bookquill.util.ApiHelper;
-import com.example.bookquill.viewModel.ViewModelInicio;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.bookquill.viewModel.viewModelFactory.ViewModelUser;
 
 import github.com.st235.lib_expandablebottombar.ExpandableBottomBar;
 import github.com.st235.lib_expandablebottombar.MenuItem;
-import io.reactivex.rxjava3.disposables.Disposable;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function3;
 import retrofit2.Call;
@@ -43,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static String token;
     private ApiService apiService;
     private static UsuarioDTO usuarioDTO;
+    private ViewModelUser viewModelUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = navHostFragment.getNavController();
         Intent i = getIntent();
         token = i.getStringExtra("token");
+        viewModelUser = new ViewModelProvider(this).get(ViewModelUser.class);
         bottomBar.setOnItemSelectedListener(new Function3<View, MenuItem, Boolean, Unit>() {
             @Override
             public Unit invoke(View view, MenuItem menuItem, Boolean aBoolean) {
@@ -78,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<UsuarioDTO> call, Response<UsuarioDTO> response) {
                 if (response.isSuccessful()) {
                     usuarioDTO = response.body();
+                    viewModelUser.setUsuarioDTO(usuarioDTO);
                 }
             }
 

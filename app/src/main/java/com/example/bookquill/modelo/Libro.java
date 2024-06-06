@@ -8,7 +8,7 @@ public class Libro {
     private String estrellas;
     private String urlImagen;
     private Genero genero;
-
+    
     public Integer getIdLibro() {
         return idLibro;
     }

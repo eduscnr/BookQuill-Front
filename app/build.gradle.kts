@@ -59,6 +59,8 @@ dependencies {
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     //Generacion de avatares:
     implementation ("io.getstream:avatarview:1.0.7")
+    implementation("com.github.Spikeysanju:MotionToast:1.4")
+    implementation("com.github.mukeshsolanki:liquidrefreshlayout:1.0.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

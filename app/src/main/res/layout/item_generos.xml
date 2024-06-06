@@ -18,9 +18,10 @@
         android:layout_width="50sp"
         android:layout_height="wrap_content"
         android:text="Genre"
+        android:fontFamily="@font/okta_neue_semibold"
         android:textAlignment="center"
         android:textSize="11sp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"/>
 </LinearLayout>

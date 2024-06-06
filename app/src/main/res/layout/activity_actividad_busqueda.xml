@@ -23,6 +23,7 @@
             android:layout_margin="16dp"
             android:background="@drawable/estilo_buscador"
             android:drawableStart="@drawable/icono_lupa"
+            android:imeOptions="actionSearch"
             android:drawablePadding="15dp"
             android:ems="10"
             android:inputType="text"

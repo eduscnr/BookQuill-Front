@@ -3,6 +3,7 @@ package com.example.bookquill.ui;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.PagingData;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +14,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -31,17 +32,23 @@ import com.example.bookquill.comparadores.ComparadorResenia;
 import com.example.bookquill.databinding.ActividadMasInformacionBinding;
 import com.example.bookquill.modelo.DetalleResenia;
 import com.example.bookquill.modelo.Libro;
+import com.example.bookquill.modelo.ReseniaDTO;
 import com.example.bookquill.network.ApiService;
 import com.example.bookquill.network.RetrofitClient;
 import com.example.bookquill.viewModel.ViewModelMasInformacion;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryMasInformacion;
 import com.google.gson.Gson;
+import com.madapps.liquid.LiquidRefreshLayout;
+
+import java.util.Date;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class ActividadMasInformacion extends AppCompatActivity {
     private ActividadMasInformacionBinding binding;
@@ -100,7 +107,13 @@ public class ActividadMasInformacion extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()){
-                            Toast.makeText(ActividadMasInformacion.this, "Libro favorito insertado", Toast.LENGTH_SHORT).show();
+                            MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                    "Información",
+                                    "Guardado como favorito correctamente",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
                         }
                     }
 
@@ -115,7 +128,13 @@ public class ActividadMasInformacion extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(ActividadMasInformacion.this, "Libro favorito eliminado", Toast.LENGTH_SHORT).show();
+                            MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                    "Información",
+                                    "Eliminado como favorito",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
                         }
                     }
 
@@ -165,7 +184,54 @@ public class ActividadMasInformacion extends AppCompatActivity {
         insertarLibroLeido();
         esPendiente();
         esLeido();
+        agregarResenia();
+        refrescarPantalla();
     }
+
+    private void refrescarPantalla() {
+        binding.refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
+            @Override
+            public void completeRefresh() {
+
+            }
+
+            @Override
+            public void refreshing() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        inicializarRecyclerView();
+                        binding.refreshLayout.finishRefreshing();
+                    }
+                }, 3000);
+            }
+        });
+    }
+
+    private void agregarResenia() {
+        binding.publicarResenia.setOnClickListener(view ->{
+            String texto = binding.nuevaResenia.getText().toString();
+            ReseniaDTO reseniaDTO = new ReseniaDTO(MainActivity.getUsuarioDTO().getIdUsuario(), texto, libro.getIdLibro());
+            apiService.agregarResenia(reseniaDTO).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable throwable) {
+                    MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                            "Error",
+                            "No se ha podido realizar la accioón",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
+                }
+            });
+        });
+    }
+
     private void inicializarRecyclerView(){
         listaReseniaRecyclerView = binding.resenias;
         AdaptadorResenia adaptadorResenia = new AdaptadorResenia(new ComparadorResenia());
@@ -192,7 +258,13 @@ public class ActividadMasInformacion extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(ActividadMasInformacion.this, "Libro pendiente insertado", Toast.LENGTH_SHORT).show();
+                            MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                    "Información",
+                                    "Libro pendiente guardado",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
                         }
                     }
 
@@ -208,7 +280,13 @@ public class ActividadMasInformacion extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(ActividadMasInformacion.this, "Libro pendiente eliminado", Toast.LENGTH_SHORT).show();
+                            MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                    "Información",
+                                    "Libro pendiente eliminado",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
                         }
                     }
 
@@ -229,7 +307,13 @@ public class ActividadMasInformacion extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(ActividadMasInformacion.this, "Libro leido insertado", Toast.LENGTH_SHORT).show();
+                            MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                    "Información",
+                                    "Libro leido guardado",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
                         }
                     }
 
@@ -245,7 +329,13 @@ public class ActividadMasInformacion extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(ActividadMasInformacion.this, "Libro leido eliminado", Toast.LENGTH_SHORT).show();
+                            MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                    "Información",
+                                    "Libro leido eliminado",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
                         }
                     }
 
