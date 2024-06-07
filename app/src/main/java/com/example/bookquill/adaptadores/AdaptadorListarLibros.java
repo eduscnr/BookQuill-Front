@@ -71,7 +71,10 @@ public class AdaptadorListarLibros extends PagingDataAdapter<Libro, AdaptadorLis
                         holder.imageViewPortada.setImageBitmap(scaledBitmap);
                         return true;
                     }
-                }).apply(RequestOptions.bitmapTransform(new RoundedCorners(35))).into(holder.imageViewPortada);
+                }).apply(RequestOptions.bitmapTransform(new RoundedCorners(35)))
+                        .placeholder(R.drawable.ic_imagen)
+                        .into(holder.imageViewPortada);
+
             }
             holder.libro.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -22,6 +22,7 @@ import com.example.bookquill.adaptadores.AdaptadorLibrosInicio;
 import com.example.bookquill.comparadores.ComparadorLibros;
 import com.example.bookquill.databinding.FragmentFragmentoInicioBinding;
 import com.example.bookquill.modelo.Libro;
+import com.example.bookquill.viewModel.SharedViewModel;
 import com.example.bookquill.viewModel.viewModelFactory.FactoryInicio;
 import com.example.bookquill.viewModel.ViewModelInicio;
 import com.example.bookquill.viewModel.viewModelFactory.ViewModelUser;
@@ -53,11 +54,21 @@ public class FragmentoInicio extends Fragment implements AdaptadorLibrosInicio.O
             binding.avatarInicial.setAvatarInitials(usuarioDTO.getNombreUsuario());
         });
         binding.textViewMejoresLibros.setOnClickListener(view -> {
+            SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+            viewModel.setArgumentos("Mejores libros");
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_hostfragment);
             navController.navigate(R.id.action_fragmento_inicio_to_fragmento_lstar_libros, null,new NavOptions.Builder()
                     .setPopUpTo(R.id.inicio, true)
                     .build());
 
+        });
+        binding.verRecomendados.setOnClickListener(view->{
+            SharedViewModel viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+            viewModel.setArgumentos("Recomendados");
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_hostfragment);
+            navController.navigate(R.id.action_fragmento_inicio_to_fragmento_lstar_libros, null,new NavOptions.Builder()
+                    .setPopUpTo(R.id.inicio, true)
+                    .build());
         });
         return binding.getRoot();
     }

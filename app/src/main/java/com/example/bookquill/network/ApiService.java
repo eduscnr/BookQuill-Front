@@ -23,7 +23,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("/libros/listar")
-    Single<List<Libro>> getLibros(@Query("page") int page);
+    Single<RespuestaListarLibros> getLibros(@Query("page") int page);
     @GET("/libros/top10")
     Single<List<Libro>> getLibrosTop10();
     @GET("/libros/random")
