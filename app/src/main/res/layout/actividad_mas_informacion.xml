@@ -5,7 +5,7 @@
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:AniBackColor="@color/colorAccent"
+    app:AniBackColor="@color/white"
     app:AniForeColor="@color/black"
     app:CircleSmaller="6">
     <ScrollView

@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -212,23 +215,42 @@ public class ActividadMasInformacion extends AppCompatActivity {
         binding.publicarResenia.setOnClickListener(view ->{
             String texto = binding.nuevaResenia.getText().toString();
             ReseniaDTO reseniaDTO = new ReseniaDTO(MainActivity.getUsuarioDTO().getIdUsuario(), texto, libro.getIdLibro());
-            apiService.agregarResenia(reseniaDTO).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
+            if (!texto.equalsIgnoreCase("")) {
+                apiService.agregarResenia(reseniaDTO).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        hideKeyboard();
+                        binding.nuevaResenia.setText("");
+                        MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                "Información",
+                                "Reseña agregada correctamente",
+                                MotionToastStyle.SUCCESS,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.LONG_DURATION,
+                                ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
+                    }
 
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable throwable) {
-                    MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
-                            "Error",
-                            "No se ha podido realizar la accioón",
-                            MotionToastStyle.ERROR,
-                            MotionToast.GRAVITY_BOTTOM,
-                            MotionToast.LONG_DURATION,
-                            ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable throwable) {
+                        hideKeyboard();
+                        MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                                "Error",
+                                "No se ha podido realizar la accioón",
+                                MotionToastStyle.ERROR,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.LONG_DURATION,
+                                ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
+                    }
+                });
+            } else {
+                MotionToast.Companion.createColorToast(ActividadMasInformacion.this,
+                        "Error",
+                        "La reseña no puede estar vacia",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(ActividadMasInformacion.this, R.font.okta_neue_regular));
+            }
         });
     }
 
@@ -390,5 +412,12 @@ public class ActividadMasInformacion extends AppCompatActivity {
                 Toast.makeText(ActividadMasInformacion.this, "Error de red " + throwable, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
